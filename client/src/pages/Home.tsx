@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { ServicesSection } from "@/components/ServicesSection";
 import { BenefitsSection } from "@/components/BenefitsSection";
 import { ProductGallery } from "@/components/ProductGallery";
+import { PriceCalculator } from "@/components/PriceCalculator";
 import { PortfolioGallery } from "@/components/PortfolioGallery";
 import { CTASection } from "@/components/CTASection";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
@@ -17,6 +18,7 @@ export default function Home() {
         <ServicesSection />
         <BenefitsSection />
         <ProductGallery />
+        <PriceCalculator />
         <PortfolioGallery />
         <CTASection />
         <WhatsAppCTA />
