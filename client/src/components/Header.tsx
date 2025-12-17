@@ -36,7 +36,7 @@ export function Header() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-background/95 backdrop-blur-md border-b shadow-sm"
-            : "bg-white/10 backdrop-blur-md border-b border-white/10"
+            : "bg-transparent"
         }`}
       >
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
@@ -49,8 +49,7 @@ export function Header() {
               <img 
                 src={logoImage} 
                 alt="TeckPrints" 
-                className="h-10 md:h-12 w-auto brightness-0 invert"
-                style={{ filter: isScrolled ? 'none' : 'brightness(0) invert(1)' }}
+                className="h-10 md:h-12 w-auto"
               />
             </a>
 
@@ -59,11 +58,7 @@ export function Header() {
                 <button
                   key={link.label}
                   onClick={() => handleNavClick(link.href)}
-                  className={`text-sm font-medium transition-colors ${
-                    isScrolled 
-                      ? "text-muted-foreground hover:text-foreground" 
-                      : "text-white/80 hover:text-white"
-                  }`}
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                   data-testid={`link-nav-${link.label.toLowerCase()}`}
                 >
                   {link.label}
@@ -72,11 +67,7 @@ export function Header() {
             </nav>
 
             <div className="hidden md:flex items-center gap-4">
-              <Button 
-                asChild 
-                data-testid="button-header-cta"
-                className={isScrolled ? "" : "bg-white text-primary hover:bg-white/90"}
-              >
+              <Button asChild data-testid="button-header-cta">
                 <a
                   href={getWhatsAppUrl()}
                   target="_blank"
@@ -89,7 +80,7 @@ export function Header() {
             </div>
 
             <button
-              className={`md:hidden p-2 ${isScrolled ? "" : "text-white"}`}
+              className="md:hidden p-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
               data-testid="button-mobile-menu"
