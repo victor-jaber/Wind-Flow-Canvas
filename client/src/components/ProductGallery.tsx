@@ -56,11 +56,18 @@ export function ProductGallery() {
           </p>
         </div>
         
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          {products.map((product) => {
+            const containerHeight = {
+              sm: "h-28 md:h-36",
+              md: "h-32 md:h-44",
+              lg: "h-36 md:h-52",
+              xl: "h-40 md:h-60",
+            };
+            return (
             <Card
               key={product.id}
-              className="relative overflow-visible p-6 flex flex-col"
+              className="relative overflow-hidden p-4 md:p-6 flex flex-col"
               data-testid={`card-product-${product.id}`}
             >
               {product.popular && (
@@ -69,30 +76,33 @@ export function ProductGallery() {
                 </Badge>
               )}
               
-              <div className="h-40 flex items-end justify-center mb-6 mt-8">
-                <WindBannerAnimation
-                  size={product.size}
-                  showPole={false}
-                  text={product.name.split(" ")[2]}
-                />
+              <div className={`${containerHeight[product.size]} flex items-end justify-center mb-4 md:mb-6 mt-6 md:mt-8 overflow-hidden`}>
+                <div className="scale-75 md:scale-100 origin-bottom">
+                  <WindBannerAnimation
+                    size={product.size}
+                    showPole={false}
+                    text={product.name.split(" ")[2]}
+                  />
+                </div>
               </div>
               
-              <h3 className="text-xl font-bold mb-2">{product.name}</h3>
+              <h3 className="text-base md:text-xl font-bold mb-1 md:mb-2">{product.name}</h3>
               
-              <div className="flex items-center gap-2 text-muted-foreground mb-3">
-                <Ruler className="w-4 h-4" />
-                <span className="text-sm">{product.dimensions}</span>
+              <div className="flex items-center gap-2 text-muted-foreground mb-2 md:mb-3">
+                <Ruler className="w-3 h-3 md:w-4 md:h-4" />
+                <span className="text-xs md:text-sm">{product.dimensions}</span>
               </div>
               
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4 hidden sm:block">
                 Ideal para: {product.ideal}
               </p>
               
               <div className="mt-auto">
-                <p className="text-lg font-bold text-primary mb-4">{product.price}</p>
+                <p className="text-sm md:text-lg font-bold text-primary mb-3 md:mb-4">{product.price}</p>
                 <Button
                   variant="outline"
                   className="w-full"
+                  size="sm"
                   asChild
                   data-testid={`button-product-${product.id}`}
                 >
@@ -102,12 +112,14 @@ export function ProductGallery() {
                     rel="noopener noreferrer"
                   >
                     <SiWhatsapp className="w-4 h-4 mr-2" />
-                    Personalizar
+                    <span className="hidden md:inline">Personalizar</span>
+                    <span className="md:hidden">Orçamento</span>
                   </a>
                 </Button>
               </div>
             </Card>
-          ))}
+          );
+          })}
         </div>
         
         <div className="mt-12 text-center">
