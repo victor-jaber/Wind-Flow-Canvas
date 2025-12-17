@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { ServicesSection } from "@/components/ServicesSection";
 import { BenefitsSection } from "@/components/BenefitsSection";
+import { B2BResellerSection } from "@/components/B2BResellerSection";
 import { ProductGallery } from "@/components/ProductGallery";
 import { PriceCalculator } from "@/components/PriceCalculator";
 import { PortfolioGallery } from "@/components/PortfolioGallery";
@@ -19,6 +20,7 @@ export default function Home() {
         <HeroSection />
         <ServicesSection />
         <BenefitsSection />
+        <B2BResellerSection />
         <ProductGallery />
         <PriceCalculator />
         <PortfolioGallery />
