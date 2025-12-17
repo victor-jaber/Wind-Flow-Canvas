@@ -11,7 +11,6 @@ const portfolioItems = [
     location: "São Paulo, SP",
     date: "Janeiro 2024",
     category: "Eventos",
-    size: "large",
     gradient: "from-purple-600 to-pink-500",
   },
   {
@@ -20,7 +19,6 @@ const portfolioItems = [
     location: "Rio de Janeiro, RJ",
     date: "Dezembro 2023",
     category: "Varejo",
-    size: "medium",
     gradient: "from-blue-600 to-cyan-500",
   },
   {
@@ -29,7 +27,6 @@ const portfolioItems = [
     location: "Florianópolis, SC",
     date: "Novembro 2023",
     category: "Esportes",
-    size: "small",
     gradient: "from-orange-500 to-yellow-400",
   },
   {
@@ -38,7 +35,6 @@ const portfolioItems = [
     location: "Curitiba, PR",
     date: "Novembro 2023",
     category: "Promoções",
-    size: "small",
     gradient: "from-gray-800 to-gray-600",
   },
   {
@@ -47,7 +43,6 @@ const portfolioItems = [
     location: "Belo Horizonte, MG",
     date: "Outubro 2023",
     category: "Gastronomia",
-    size: "medium",
     gradient: "from-red-600 to-orange-500",
   },
   {
@@ -56,7 +51,6 @@ const portfolioItems = [
     location: "Brasília, DF",
     date: "Setembro 2023",
     category: "Corporativo",
-    size: "large",
     gradient: "from-indigo-600 to-purple-500",
   },
 ];
@@ -67,20 +61,13 @@ interface PortfolioItem {
   location: string;
   date: string;
   category: string;
-  size: string;
   gradient: string;
 }
 
-function GalleryCard({ item, onClick }: { item: PortfolioItem; onClick: () => void }) {
-  const sizeClasses = {
-    large: "md:col-span-2 md:row-span-2 aspect-square md:aspect-auto",
-    medium: "md:col-span-1 md:row-span-2 aspect-[3/4]",
-    small: "md:col-span-1 md:row-span-1 aspect-video",
-  };
-
+function GalleryCard({ item, onClick, className = "" }: { item: PortfolioItem; onClick: () => void; className?: string }) {
   return (
     <motion.div
-      className={`relative group cursor-pointer overflow-hidden rounded-xl ${sizeClasses[item.size as keyof typeof sizeClasses]}`}
+      className={`relative group cursor-pointer overflow-hidden rounded-xl ${className}`}
       onClick={onClick}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -152,14 +139,37 @@ export function PortfolioGallery() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-[200px] gap-4">
-          {portfolioItems.map((item) => (
-            <GalleryCard
-              key={item.id}
-              item={item}
-              onClick={() => setSelectedItem(item)}
-            />
-          ))}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <GalleryCard
+            item={portfolioItems[0]}
+            onClick={() => setSelectedItem(portfolioItems[0])}
+            className="col-span-2 row-span-2 aspect-square"
+          />
+          <GalleryCard
+            item={portfolioItems[1]}
+            onClick={() => setSelectedItem(portfolioItems[1])}
+            className="col-span-1 aspect-square"
+          />
+          <GalleryCard
+            item={portfolioItems[2]}
+            onClick={() => setSelectedItem(portfolioItems[2])}
+            className="col-span-1 aspect-square"
+          />
+          <GalleryCard
+            item={portfolioItems[3]}
+            onClick={() => setSelectedItem(portfolioItems[3])}
+            className="col-span-1 aspect-square"
+          />
+          <GalleryCard
+            item={portfolioItems[4]}
+            onClick={() => setSelectedItem(portfolioItems[4])}
+            className="col-span-1 aspect-square"
+          />
+          <GalleryCard
+            item={portfolioItems[5]}
+            onClick={() => setSelectedItem(portfolioItems[5])}
+            className="col-span-2 aspect-[2/1]"
+          />
         </div>
 
         <motion.div 
