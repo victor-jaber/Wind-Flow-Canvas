@@ -46,7 +46,7 @@ export function ProductGallery() {
   return (
     <section id="produtos" className="py-20 md:py-28 bg-muted/30">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Nossos <span className="text-primary">Produtos</span>
           </h2>
@@ -69,7 +69,7 @@ export function ProductGallery() {
                 </Badge>
               )}
               
-              <div className="h-40 flex items-end justify-center mb-6 mt-2">
+              <div className="h-40 flex items-end justify-center mb-6 mt-8">
                 <WindBannerAnimation
                   size={product.size}
                   showPole={false}
