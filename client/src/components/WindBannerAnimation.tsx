@@ -79,29 +79,32 @@ export function WindBannerAnimation({
   const combinedWindX = windForce.x * 0.3 + animState.intensity;
   const combinedAngle = animState.angle + windForce.x * 3;
 
-  const cobraPath = `polygon(
-    ${2 + animState.wave1 * 0.3}% 0%, 
-    ${98 + animState.wave1 * 0.3}% 0%,
-    ${100 + animState.wave2 * 0.8}% 15%,
-    ${98 + animState.wave3 * 1.2}% 30%,
-    ${100 + animState.wave4 * 1.5}% 45%,
-    ${97 + animState.wave5 * 1.2}% 60%,
-    ${100 + animState.wave3 * 1.0}% 75%,
-    ${98 + animState.wave2 * 0.8}% 90%,
-    100% 95%,
-    85% 100%,
-    70% ${97 + animState.wave4 * 0.5}%,
-    55% 100%,
-    40% ${96 + animState.wave3 * 0.5}%,
-    25% 100%,
-    10% ${98 + animState.wave2 * 0.3}%,
-    0% 100%,
-    ${2 + animState.wave2 * 0.8}% 90%,
-    ${0 + animState.wave3 * 1.0}% 75%,
-    ${3 + animState.wave5 * 1.2}% 60%,
-    ${0 + animState.wave4 * 1.5}% 45%,
-    ${2 + animState.wave3 * 1.2}% 30%,
-    ${0 + animState.wave2 * 0.8}% 15%
+  const featherPath = `polygon(
+    ${50 + animState.wave1 * 0.3}% 0%,
+    ${65 + animState.wave2 * 0.5}% 2%,
+    ${80 + animState.wave3 * 0.6}% 5%,
+    ${90 + animState.wave4 * 0.7}% 10%,
+    ${96 + animState.wave5 * 0.8}% 18%,
+    ${100 + animState.wave3 * 1.0}% 28%,
+    ${98 + animState.wave4 * 1.2}% 40%,
+    ${100 + animState.wave5 * 1.0}% 52%,
+    ${97 + animState.wave3 * 1.2}% 65%,
+    ${100 + animState.wave2 * 0.8}% 78%,
+    ${95 + animState.wave4 * 0.6}% 88%,
+    ${85 + animState.wave5 * 0.4}% 95%,
+    ${70 + animState.wave3 * 0.3}% 100%,
+    ${50 + animState.wave2 * 0.2}% 100%,
+    ${30 + animState.wave1 * 0.3}% 100%,
+    ${15 + animState.wave4 * 0.4}% 95%,
+    ${5 + animState.wave5 * 0.6}% 88%,
+    ${0 + animState.wave2 * 0.8}% 78%,
+    ${3 + animState.wave3 * 1.2}% 65%,
+    ${0 + animState.wave5 * 1.0}% 52%,
+    ${2 + animState.wave4 * 1.2}% 40%,
+    ${0 + animState.wave3 * 1.0}% 28%,
+    ${4 + animState.wave5 * 0.8}% 18%,
+    ${15 + animState.wave4 * 0.5}% 8%,
+    ${30 + animState.wave2 * 0.3}% 3%
   )`;
 
   const fabricStyle = {
@@ -110,7 +113,7 @@ export function WindBannerAnimation({
       rotateY(${combinedWindX * 5}deg)
       rotateZ(${combinedAngle * 0.2}deg)
     `,
-    clipPath: cobraPath,
+    clipPath: featherPath,
   };
 
   return (
@@ -156,7 +159,7 @@ export function WindBannerAnimation({
         }}
       >
         <div
-          className="absolute inset-0 bg-gradient-to-b from-primary via-primary to-primary/90 rounded-b-lg shadow-xl"
+          className="absolute inset-0 bg-gradient-to-b from-primary via-primary to-primary/90 shadow-xl"
           style={{
             ...fabricStyle,
             transformOrigin: "top center",
@@ -201,7 +204,7 @@ export function WindBannerAnimation({
         </div>
         
         <div
-          className="absolute inset-0 rounded-b-lg opacity-20 blur-sm"
+          className="absolute inset-0 opacity-20 blur-sm"
           style={{
             transform: `
               skewX(${combinedWindX * 8}deg) 
@@ -209,7 +212,7 @@ export function WindBannerAnimation({
             `,
             transformOrigin: "top center",
             background: "linear-gradient(to bottom, hsl(var(--primary) / 0.5), hsl(var(--primary) / 0.3))",
-            clipPath: cobraPath,
+            clipPath: featherPath,
           }}
         />
       </div>
