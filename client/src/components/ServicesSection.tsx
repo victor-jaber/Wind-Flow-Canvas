@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Calendar, Archive, Check } from "lucide-react";
+import { ShoppingCart, Calendar, Check } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 import { getWhatsAppUrl } from "./WhatsAppCTA";
 
@@ -9,41 +9,28 @@ const services = [
     id: "compra" as const,
     icon: ShoppingCart,
     title: "Compra",
-    description: "Adquira wind banners personalizados com a sua marca",
+    description: "Wind banners e bases de pé para revendedores e grandes empresas",
     benefits: [
+      "Preços especiais para atacado",
       "Impressão de alta qualidade",
       "Materiais resistentes às intempéries",
-      "Personalização completa",
       "Entrega em todo Brasil",
     ],
-    cta: "Comprar Agora",
+    cta: "Solicitar Orçamento",
+    featured: true,
   },
   {
     id: "aluguel" as const,
     icon: Calendar,
     title: "Aluguel",
-    description: "Alugue wind banners para eventos e campanhas temporárias",
+    description: "Wind banners para eventos corporativos e campanhas temporárias",
     benefits: [
-      "Economia para eventos pontuais",
+      "Ideal para feiras e eventos",
       "Manutenção inclusa",
       "Entrega e retirada",
       "Diversos tamanhos disponíveis",
     ],
     cta: "Alugar",
-    featured: true,
-  },
-  {
-    id: "armazenamento" as const,
-    icon: Archive,
-    title: "Armazenamento",
-    description: "Guarde seus wind banners em local seguro e adequado",
-    benefits: [
-      "Ambiente climatizado",
-      "Proteção contra danos",
-      "Acesso quando precisar",
-      "Manutenção preventiva",
-    ],
-    cta: "Conhecer Espaço",
   },
 ];
 
@@ -61,7 +48,7 @@ export function ServicesSection() {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
           {services.map((service) => {
             const Icon = service.icon;
             return (

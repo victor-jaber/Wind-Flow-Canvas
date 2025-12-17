@@ -9,11 +9,9 @@ const WHATSAPP_MESSAGE = "Olá! Gostaria de saber mais sobre os wind banners da 
 export function getWhatsAppUrl(service?: string) {
   let message = WHATSAPP_MESSAGE;
   if (service === "compra") {
-    message = "Olá! Gostaria de saber mais sobre a COMPRA de wind banners.";
+    message = "Olá! Sou revendedor/empresa e gostaria de saber mais sobre a COMPRA de wind banners e bases de pé.";
   } else if (service === "aluguel") {
-    message = "Olá! Gostaria de saber mais sobre o ALUGUEL de wind banners.";
-  } else if (service === "armazenamento") {
-    message = "Olá! Gostaria de saber mais sobre o serviço de ARMAZENAMENTO de wind banners.";
+    message = "Olá! Gostaria de saber mais sobre o ALUGUEL de wind banners para eventos.";
   }
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }

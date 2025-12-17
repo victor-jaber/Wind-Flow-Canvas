@@ -6,9 +6,8 @@ import logoImage from "@assets/cropped-logo-tec_1765989491588.png";
 const footerLinks = {
   services: [
     { label: "Compra de Wind Banners", service: "compra" as const },
+    { label: "Bases de Pé", service: "compra" as const },
     { label: "Aluguel para Eventos", service: "aluguel" as const },
-    { label: "Armazenamento", service: "armazenamento" as const },
-    { label: "Tamanhos Especiais", service: undefined },
   ],
   company: [
     { label: "Sobre Nós", href: "#" },
@@ -40,8 +39,7 @@ export function Footer() {
               />
             </div>
             <p className="text-muted-foreground mb-6 max-w-xs">
-              Especialistas em wind banners de alta qualidade. 
-              Compre, alugue ou armazene conosco.
+              Especialistas em wind banners e bases de pé para revendedores e grandes empresas.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => {
