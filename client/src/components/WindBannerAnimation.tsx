@@ -107,7 +107,7 @@ export function WindBannerGroup() {
     <div className="flex items-end justify-center gap-8 md:gap-12">
       <WindBannerAnimation size="md" className="animate-float" text="PROMO" />
       <WindBannerAnimation size="xl" text="TeckPrints" />
-      <WindBannerAnimation size="lg" className="animate-float" style={{ animationDelay: "1s" } as any} text="EVENTOS" />
+      <WindBannerAnimation size="lg" className="animate-float [animation-delay:1s]" text="EVENTOS" />
     </div>
   );
 }
