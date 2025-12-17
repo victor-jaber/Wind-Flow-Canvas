@@ -1,6 +1,7 @@
-import { Wind, MapPin, Clock, Instagram, Facebook, Linkedin } from "lucide-react";
+import { MapPin, Clock, Instagram, Facebook, Linkedin } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 import { getWhatsAppUrl } from "./WhatsAppCTA";
+import logoImage from "@assets/cropped-logo-tec_1765989491588.png";
 
 const footerLinks = {
   services: [
@@ -31,11 +32,12 @@ export function Footer() {
       <div className="container mx-auto px-4 md:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                <Wind className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold">TeckPrints</span>
+            <div className="mb-6">
+              <img 
+                src={logoImage} 
+                alt="TeckPrints" 
+                className="h-14 w-auto"
+              />
             </div>
             <p className="text-muted-foreground mb-6 max-w-xs">
               Especialistas em wind banners de alta qualidade. 

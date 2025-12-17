@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Wind, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 import { getWhatsAppUrl } from "./WhatsAppCTA";
+import logoImage from "@assets/cropped-logo-tec_1765989491588.png";
 
 const navLinks = [
   { label: "Serviços", href: "#servicos" },
@@ -42,13 +43,14 @@ export function Header() {
           <div className="flex items-center justify-between h-16 md:h-20">
             <a
               href="#"
-              className="flex items-center gap-2"
+              className="flex items-center"
               data-testid="link-logo"
             >
-              <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-                <Wind className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <span className="text-lg font-bold">TeckPrints</span>
+              <img 
+                src={logoImage} 
+                alt="TeckPrints" 
+                className="h-10 md:h-12 w-auto"
+              />
             </a>
 
             <nav className="hidden md:flex items-center gap-8">
