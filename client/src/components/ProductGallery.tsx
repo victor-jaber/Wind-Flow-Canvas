@@ -64,12 +64,12 @@ export function ProductGallery() {
               data-testid={`card-product-${product.id}`}
             >
               {product.popular && (
-                <Badge className="absolute -top-2 right-4 no-default-active-elevate">
+                <Badge className="absolute -top-3 right-4 z-10 no-default-active-elevate">
                   Mais Vendido
                 </Badge>
               )}
               
-              <div className="h-40 flex items-end justify-center mb-6">
+              <div className="h-40 flex items-end justify-center mb-6 mt-2">
                 <WindBannerAnimation
                   size={product.size}
                   showPole={false}
