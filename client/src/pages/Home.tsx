@@ -9,6 +9,7 @@ import { FAQSection } from "@/components/FAQSection";
 import { CTASection } from "@/components/CTASection";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { Footer } from "@/components/Footer";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <WhatsAppCTA />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }
