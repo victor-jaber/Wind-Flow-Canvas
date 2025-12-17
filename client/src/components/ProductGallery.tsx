@@ -2,11 +2,9 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { WindBannerAnimation } from "./WindBannerAnimation";
-import { Ruler, ArrowRight } from "lucide-react";
-
-interface ProductGalleryProps {
-  onProductClick: () => void;
-}
+import { Ruler } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
+import { getWhatsAppUrl } from "./WhatsAppCTA";
 
 const products = [
   {
@@ -44,7 +42,7 @@ const products = [
   },
 ];
 
-export function ProductGallery({ onProductClick }: ProductGalleryProps) {
+export function ProductGallery() {
   return (
     <section id="produtos" className="py-20 md:py-28 bg-muted/30">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
@@ -95,11 +93,17 @@ export function ProductGallery({ onProductClick }: ProductGalleryProps) {
                 <Button
                   variant="outline"
                   className="w-full"
-                  onClick={onProductClick}
+                  asChild
                   data-testid={`button-product-${product.id}`}
                 >
-                  Personalizar
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <a
+                    href={getWhatsAppUrl("compra")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <SiWhatsapp className="w-4 h-4 mr-2" />
+                    Personalizar
+                  </a>
                 </Button>
               </div>
             </Card>
@@ -110,8 +114,15 @@ export function ProductGallery({ onProductClick }: ProductGalleryProps) {
           <p className="text-muted-foreground mb-4">
             Precisa de um tamanho personalizado? Entre em contato!
           </p>
-          <Button onClick={onProductClick} data-testid="button-custom-size">
-            Solicitar Tamanho Especial
+          <Button asChild data-testid="button-custom-size">
+            <a
+              href={getWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <SiWhatsapp className="w-4 h-4 mr-2" />
+              Solicitar Tamanho Especial
+            </a>
           </Button>
         </div>
       </div>

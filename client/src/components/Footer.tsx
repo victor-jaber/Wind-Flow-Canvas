@@ -1,18 +1,18 @@
-import { Wind, Phone, Mail, MapPin, Clock, Instagram, Facebook, Linkedin } from "lucide-react";
+import { Wind, MapPin, Clock, Instagram, Facebook, Linkedin } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
+import { getWhatsAppUrl } from "./WhatsAppCTA";
 
 const footerLinks = {
   services: [
-    { label: "Compra de Wind Banners", href: "#servicos" },
-    { label: "Aluguel para Eventos", href: "#servicos" },
-    { label: "Armazenamento", href: "#servicos" },
-    { label: "Tamanhos Especiais", href: "#contato" },
+    { label: "Compra de Wind Banners", service: "compra" as const },
+    { label: "Aluguel para Eventos", service: "aluguel" as const },
+    { label: "Armazenamento", service: "armazenamento" as const },
+    { label: "Tamanhos Especiais", service: undefined },
   ],
   company: [
     { label: "Sobre Nós", href: "#" },
     { label: "Nossos Produtos", href: "#produtos" },
     { label: "Contato", href: "#contato" },
-    { label: "Blog", href: "#" },
   ],
 };
 
@@ -20,7 +20,7 @@ const socialLinks = [
   { icon: Instagram, href: "https://instagram.com/teckprints", label: "Instagram" },
   { icon: Facebook, href: "https://facebook.com/teckprints", label: "Facebook" },
   { icon: Linkedin, href: "https://linkedin.com/company/teckprints", label: "LinkedIn" },
-  { icon: SiWhatsapp, href: "https://wa.me/5511999999999", label: "WhatsApp" },
+  { icon: SiWhatsapp, href: getWhatsAppUrl(), label: "WhatsApp" },
 ];
 
 export function Footer() {
@@ -67,10 +67,13 @@ export function Footer() {
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
                   <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    href={getWhatsAppUrl(link.service)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-2"
                     data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
                   >
+                    <SiWhatsapp className="w-3 h-3" />
                     {link.label}
                   </a>
                 </li>
@@ -98,18 +101,19 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-6">Contato</h4>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                <div>
-                  <a href="tel:+5511999999999" className="text-muted-foreground hover:text-foreground transition-colors">
-                    (11) 99999-9999
-                  </a>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                <a href="mailto:contato@teckprints.com.br" className="text-muted-foreground hover:text-foreground transition-colors break-all">
-                  contato@teckprints.com.br
+              <li>
+                <a
+                  href={getWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 text-muted-foreground hover:text-foreground transition-colors"
+                  data-testid="link-footer-whatsapp"
+                >
+                  <SiWhatsapp className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="font-medium text-foreground">WhatsApp</span>
+                    <p className="text-sm">(11) 99999-9999</p>
+                  </div>
                 </a>
               </li>
               <li className="flex items-start gap-3">

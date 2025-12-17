@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Wind, Menu, X } from "lucide-react";
-
-interface HeaderProps {
-  onCTAClick: () => void;
-}
+import { SiWhatsapp } from "react-icons/si";
+import { getWhatsAppUrl } from "./WhatsAppCTA";
 
 const navLinks = [
   { label: "Serviços", href: "#servicos" },
@@ -12,7 +10,7 @@ const navLinks = [
   { label: "Contato", href: "#contato" },
 ];
 
-export function Header({ onCTAClick }: HeaderProps) {
+export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -67,8 +65,15 @@ export function Header({ onCTAClick }: HeaderProps) {
             </nav>
 
             <div className="hidden md:flex items-center gap-4">
-              <Button onClick={onCTAClick} data-testid="button-header-cta">
-                Orçamento Grátis
+              <Button asChild data-testid="button-header-cta">
+                <a
+                  href={getWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <SiWhatsapp className="w-4 h-4 mr-2" />
+                  Orçamento Grátis
+                </a>
               </Button>
             </div>
 
@@ -108,13 +113,18 @@ export function Header({ onCTAClick }: HeaderProps) {
               ))}
               <Button
                 className="mt-4 w-full"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  onCTAClick();
-                }}
+                asChild
                 data-testid="button-mobile-cta"
               >
-                Orçamento Grátis
+                <a
+                  href={getWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <SiWhatsapp className="w-4 h-4 mr-2" />
+                  Orçamento Grátis
+                </a>
               </Button>
             </nav>
           </div>

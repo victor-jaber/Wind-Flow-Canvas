@@ -1,10 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Calendar, Archive, Check, ArrowRight } from "lucide-react";
-
-interface ServicesSectionProps {
-  onServiceClick: (service: "compra" | "aluguel" | "armazenamento") => void;
-}
+import { ShoppingCart, Calendar, Archive, Check } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
+import { getWhatsAppUrl } from "./WhatsAppCTA";
 
 const services = [
   {
@@ -49,7 +47,7 @@ const services = [
   },
 ];
 
-export function ServicesSection({ onServiceClick }: ServicesSectionProps) {
+export function ServicesSection() {
   return (
     <section id="servicos" className="py-20 md:py-28 bg-muted/30">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
@@ -107,11 +105,17 @@ export function ServicesSection({ onServiceClick }: ServicesSectionProps) {
                 <Button
                   className="w-full"
                   variant={service.featured ? "default" : "outline"}
-                  onClick={() => onServiceClick(service.id)}
+                  asChild
                   data-testid={`button-service-${service.id}`}
                 >
-                  {service.cta}
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <a
+                    href={getWhatsAppUrl(service.id)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <SiWhatsapp className="w-4 h-4 mr-2" />
+                    {service.cta}
+                  </a>
                 </Button>
               </Card>
             );

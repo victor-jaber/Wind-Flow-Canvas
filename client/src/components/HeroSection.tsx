@@ -1,12 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { WindBannerAnimation } from "./WindBannerAnimation";
 import { ArrowRight, Users, Sparkles } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
+import { getWhatsAppUrl } from "./WhatsAppCTA";
 
-interface HeroSectionProps {
-  onCTAClick: () => void;
-}
-
-export function HeroSection({ onCTAClick }: HeroSectionProps) {
+export function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-background via-background to-primary/5">
       <div className="absolute inset-0 overflow-hidden">
@@ -38,11 +36,17 @@ export function HeroSection({ onCTAClick }: HeroSectionProps) {
               <Button 
                 size="lg" 
                 className="px-8 py-6 text-base font-semibold"
-                onClick={onCTAClick}
+                asChild
                 data-testid="button-hero-cta"
               >
-                Solicitar Orçamento
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <a
+                  href={getWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <SiWhatsapp className="w-5 h-5 mr-2" />
+                  Solicitar Orçamento
+                </a>
               </Button>
               <Button 
                 variant="outline" 
@@ -52,6 +56,7 @@ export function HeroSection({ onCTAClick }: HeroSectionProps) {
                 data-testid="button-hero-services"
               >
                 Ver Serviços
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </div>
             
