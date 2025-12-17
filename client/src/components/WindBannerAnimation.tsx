@@ -50,11 +50,11 @@ export function WindBannerAnimation({
       const intensity = baseWind + gustWind + microWind + turbulence;
       const angle = Math.sin(t * 0.7) * 5 + Math.sin(t * 2.1) * 2;
       
-      const wave1 = Math.sin(t * 2.5) * 3;
-      const wave2 = Math.sin(t * 3.2 + 0.5) * 4;
-      const wave3 = Math.sin(t * 4.0 + 1.0) * 5;
-      const wave4 = Math.sin(t * 3.5 + 1.5) * 4;
-      const wave5 = Math.sin(t * 2.8 + 2.0) * 3;
+      const wave1 = Math.sin(t * 1.8) * 1.2;
+      const wave2 = Math.sin(t * 2.2 + 0.5) * 1.5;
+      const wave3 = Math.sin(t * 2.6 + 1.0) * 2.0;
+      const wave4 = Math.sin(t * 2.4 + 1.5) * 1.5;
+      const wave5 = Math.sin(t * 2.0 + 2.0) * 1.2;
       
       setAnimState({ intensity, angle, wave1, wave2, wave3, wave4, wave5 });
       animationRef.current = requestAnimationFrame(animateNaturalWind);
@@ -106,9 +106,9 @@ export function WindBannerAnimation({
 
   const fabricStyle = {
     transform: `
-      skewX(${combinedWindX * 6}deg) 
-      rotateY(${combinedWindX * 10}deg)
-      rotateZ(${combinedAngle * 0.4}deg)
+      skewX(${combinedWindX * 3}deg) 
+      rotateY(${combinedWindX * 5}deg)
+      rotateZ(${combinedAngle * 0.2}deg)
     `,
     clipPath: cobraPath,
   };
