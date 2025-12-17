@@ -45,14 +45,6 @@ const portfolioItems = [
     category: "Gastronomia",
     gradient: "from-red-600 to-orange-500",
   },
-  {
-    id: 6,
-    title: "Convenção Tech",
-    location: "Brasília, DF",
-    date: "Setembro 2023",
-    category: "Corporativo",
-    gradient: "from-indigo-600 to-purple-500",
-  },
 ];
 
 interface PortfolioItem {
@@ -164,11 +156,6 @@ export function PortfolioGallery() {
             item={portfolioItems[4]}
             onClick={() => setSelectedItem(portfolioItems[4])}
             className="col-span-1 aspect-square"
-          />
-          <GalleryCard
-            item={portfolioItems[5]}
-            onClick={() => setSelectedItem(portfolioItems[5])}
-            className="col-span-2 aspect-[2/1]"
           />
         </div>
 
