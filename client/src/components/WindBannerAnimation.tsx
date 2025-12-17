@@ -20,6 +20,8 @@ export function WindBannerAnimation({
     wave1: 0,
     wave2: 0,
     wave3: 0,
+    wave4: 0,
+    wave5: 0,
   });
   const animationRef = useRef<number>();
   const timeRef = useRef(0);
@@ -37,7 +39,7 @@ export function WindBannerAnimation({
 
   useEffect(() => {
     const animateNaturalWind = () => {
-      timeRef.current += 0.02;
+      timeRef.current += 0.025;
       const t = timeRef.current;
       
       const baseWind = Math.sin(t * 0.5) * 0.3;
@@ -48,11 +50,13 @@ export function WindBannerAnimation({
       const intensity = baseWind + gustWind + microWind + turbulence;
       const angle = Math.sin(t * 0.7) * 5 + Math.sin(t * 2.1) * 2;
       
-      const wave1 = Math.sin(t * 3) * 2;
-      const wave2 = Math.sin(t * 4 + 1) * 1.5;
-      const wave3 = Math.sin(t * 5 + 2) * 1;
+      const wave1 = Math.sin(t * 2.5) * 3;
+      const wave2 = Math.sin(t * 3.2 + 0.5) * 4;
+      const wave3 = Math.sin(t * 4.0 + 1.0) * 5;
+      const wave4 = Math.sin(t * 3.5 + 1.5) * 4;
+      const wave5 = Math.sin(t * 2.8 + 2.0) * 3;
       
-      setAnimState({ intensity, angle, wave1, wave2, wave3 });
+      setAnimState({ intensity, angle, wave1, wave2, wave3, wave4, wave5 });
       animationRef.current = requestAnimationFrame(animateNaturalWind);
     };
 
@@ -64,54 +68,91 @@ export function WindBannerAnimation({
     };
   }, []);
 
-  const sizeClasses = {
-    sm: "h-32 w-12",
-    md: "h-48 w-16",
-    lg: "h-64 w-20",
-    xl: "h-80 w-24",
+  const sizeConfig = {
+    sm: { banner: "h-32 w-12", pole: 160, base: 24, fontSize: "text-[8px]" },
+    md: { banner: "h-48 w-16", pole: 200, base: 28, fontSize: "text-[10px]" },
+    lg: { banner: "h-64 w-20", pole: 280, base: 32, fontSize: "text-xs" },
+    xl: { banner: "h-80 w-24", pole: 360, base: 40, fontSize: "text-sm" },
   };
 
-  const poleHeight = {
-    sm: "h-40",
-    md: "h-56",
-    lg: "h-72",
-    xl: "h-96",
-  };
-
+  const config = sizeConfig[size];
   const combinedWindX = windForce.x * 0.3 + animState.intensity;
   const combinedAngle = animState.angle + windForce.x * 3;
 
+  const cobraPath = `polygon(
+    ${2 + animState.wave1 * 0.3}% 0%, 
+    ${98 + animState.wave1 * 0.3}% 0%,
+    ${100 + animState.wave2 * 0.8}% 15%,
+    ${98 + animState.wave3 * 1.2}% 30%,
+    ${100 + animState.wave4 * 1.5}% 45%,
+    ${97 + animState.wave5 * 1.2}% 60%,
+    ${100 + animState.wave3 * 1.0}% 75%,
+    ${98 + animState.wave2 * 0.8}% 90%,
+    100% 95%,
+    85% 100%,
+    70% ${97 + animState.wave4 * 0.5}%,
+    55% 100%,
+    40% ${96 + animState.wave3 * 0.5}%,
+    25% 100%,
+    10% ${98 + animState.wave2 * 0.3}%,
+    0% 100%,
+    ${2 + animState.wave2 * 0.8}% 90%,
+    ${0 + animState.wave3 * 1.0}% 75%,
+    ${3 + animState.wave5 * 1.2}% 60%,
+    ${0 + animState.wave4 * 1.5}% 45%,
+    ${2 + animState.wave3 * 1.2}% 30%,
+    ${0 + animState.wave2 * 0.8}% 15%
+  )`;
+
   const fabricStyle = {
     transform: `
-      skewX(${combinedWindX * 8}deg) 
-      rotateY(${combinedWindX * 12}deg)
-      rotateZ(${combinedAngle * 0.5}deg)
+      skewX(${combinedWindX * 6}deg) 
+      rotateY(${combinedWindX * 10}deg)
+      rotateZ(${combinedAngle * 0.4}deg)
     `,
-  };
-
-  const shadowStyle = {
-    transform: `
-      skewX(${combinedWindX * 10}deg) 
-      rotateY(${combinedWindX * 15}deg)
-      rotateZ(${combinedAngle * 0.6}deg)
-      translateX(${combinedWindX * 3}px)
-    `,
+    clipPath: cobraPath,
   };
 
   return (
     <div className={`relative flex flex-col items-center ${className}`}>
       {showPole && (
-        <div
-          className={`absolute bottom-0 w-2 bg-gradient-to-b from-zinc-400 to-zinc-600 dark:from-zinc-500 dark:to-zinc-700 rounded-full shadow-lg ${poleHeight[size]}`}
-          style={{ zIndex: 1 }}
-        />
+        <>
+          <div
+            className="absolute bg-gradient-to-b from-zinc-300 via-zinc-400 to-zinc-500 dark:from-zinc-400 dark:via-zinc-500 dark:to-zinc-600 rounded-full shadow-md"
+            style={{ 
+              width: 8,
+              height: config.pole,
+              bottom: config.base / 2,
+              zIndex: 1,
+            }}
+          />
+          <div
+            className="absolute bottom-0 bg-gradient-to-t from-zinc-600 via-zinc-500 to-zinc-400 dark:from-zinc-700 dark:via-zinc-600 dark:to-zinc-500 rounded-md shadow-lg"
+            style={{
+              width: config.base * 1.5,
+              height: config.base,
+              zIndex: 0,
+            }}
+          />
+          <div
+            className="absolute bg-zinc-700 dark:bg-zinc-800 rounded-sm"
+            style={{
+              width: config.base * 1.8,
+              height: 6,
+              bottom: 0,
+              zIndex: 0,
+            }}
+          />
+        </>
       )}
+      
       <div
-        className={`relative ${sizeClasses[size]} origin-top`}
+        className={`relative ${config.banner} origin-top`}
         style={{ 
           zIndex: 2,
           perspective: "1000px",
           perspectiveOrigin: "center top",
+          marginBottom: showPole ? config.pole - parseInt(config.banner.split(' ')[0].replace('h-', '')) * 4 + config.base : 0,
         }}
       >
         <div
@@ -119,32 +160,11 @@ export function WindBannerAnimation({
           style={{
             ...fabricStyle,
             transformOrigin: "top center",
-            clipPath: `polygon(
-              0 0, 
-              100% 0, 
-              ${100 + animState.wave1}% 20%,
-              ${98 + animState.wave2}% 40%,
-              ${100 + animState.wave3}% 60%,
-              ${97 + animState.wave1}% 80%,
-              100% 95%, 
-              85% 100%, 
-              70% ${97 + animState.wave2}%, 
-              55% 100%, 
-              40% ${96 + animState.wave3}%, 
-              25% 100%, 
-              10% ${98 + animState.wave1}%, 
-              0 100%,
-              ${-animState.wave2}% 80%,
-              ${animState.wave1}% 60%,
-              ${-animState.wave3}% 40%,
-              ${animState.wave2}% 20%
-            )`,
           }}
         >
           <div 
-            className="absolute inset-0 bg-gradient-to-r from-white/15 via-transparent to-white/10"
+            className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-white/10"
             style={{ 
-              transformOrigin: "top center",
               opacity: 0.6 + Math.abs(combinedWindX) * 0.4,
             }}
           />
@@ -154,16 +174,18 @@ export function WindBannerAnimation({
               background: `linear-gradient(
                 ${90 + combinedAngle}deg, 
                 transparent 0%, 
-                rgba(255,255,255,0.1) ${30 + combinedWindX * 20}%, 
-                transparent ${50 + combinedWindX * 10}%,
-                rgba(0,0,0,0.05) ${70 + combinedWindX * 15}%,
+                rgba(255,255,255,0.15) ${25 + animState.wave3 * 3}%, 
+                transparent ${40 + animState.wave2 * 2}%,
+                rgba(0,0,0,0.08) ${60 + animState.wave4 * 2}%,
+                transparent ${75 + animState.wave5 * 2}%,
+                rgba(255,255,255,0.1) ${90 + animState.wave1 * 1}%,
                 transparent 100%
               )`,
             }}
           />
           <div className="absolute inset-0 flex items-center justify-center">
             <span
-              className="text-primary-foreground font-bold text-xs tracking-wide drop-shadow-sm"
+              className={`text-primary-foreground font-bold ${config.fontSize} tracking-wide drop-shadow-sm`}
               style={{
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
@@ -174,50 +196,20 @@ export function WindBannerAnimation({
             </span>
           </div>
           <div 
-            className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-primary/90 to-transparent"
-            style={{
-              boxShadow: "inset 0 2px 4px rgba(0,0,0,0.1)",
-            }}
-          />
-          <div 
-            className="absolute bottom-0 left-0 right-0 h-6"
-            style={{
-              background: "linear-gradient(to top, hsl(var(--primary) / 0.7), transparent)",
-              opacity: 0.5 + Math.abs(combinedWindX) * 0.3,
-            }}
+            className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-b from-black/10 to-transparent rounded-t"
           />
         </div>
+        
         <div
-          className="absolute inset-0 rounded-b-lg opacity-25 blur-sm"
-          style={{
-            ...shadowStyle,
-            transformOrigin: "top center",
-            background: "linear-gradient(to bottom, hsl(var(--primary) / 0.6), hsl(var(--primary) / 0.4))",
-            clipPath: `polygon(
-              0 0, 
-              100% 0, 
-              100% 95%, 
-              85% 100%, 
-              70% 95%, 
-              55% 100%, 
-              40% 95%, 
-              25% 100%, 
-              10% 95%, 
-              0 100%
-            )`,
-          }}
-        />
-        <div
-          className="absolute inset-0 rounded-b-lg opacity-10 blur-md"
+          className="absolute inset-0 rounded-b-lg opacity-20 blur-sm"
           style={{
             transform: `
-              skewX(${combinedWindX * 12}deg) 
-              translateX(${combinedWindX * 8}px)
-              translateY(4px)
+              skewX(${combinedWindX * 8}deg) 
+              translateX(${combinedWindX * 5}px)
             `,
             transformOrigin: "top center",
-            background: "hsl(var(--primary) / 0.5)",
-            clipPath: "polygon(0 0, 100% 0, 100% 95%, 85% 100%, 70% 95%, 55% 100%, 40% 95%, 25% 100%, 10% 95%, 0 100%)",
+            background: "linear-gradient(to bottom, hsl(var(--primary) / 0.5), hsl(var(--primary) / 0.3))",
+            clipPath: cobraPath,
           }}
         />
       </div>
@@ -227,7 +219,7 @@ export function WindBannerAnimation({
 
 export function WindBannerGroup() {
   return (
-    <div className="flex items-end justify-center gap-8 md:gap-12">
+    <div className="flex items-end justify-center gap-8 md:gap-12 pb-4">
       <WindBannerAnimation size="md" className="animate-float" text="PROMO" />
       <WindBannerAnimation size="xl" text="TeckPrints" />
       <WindBannerAnimation size="lg" className="animate-float [animation-delay:1s]" text="EVENTOS" />
