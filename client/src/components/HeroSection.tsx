@@ -28,7 +28,7 @@ export function HeroSection() {
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
-              Compre, alugue ou armazene seus wind banners conosco. 
+              Compre e alugue seus wind banners conosco. 
               Soluções completas para eventos, lojas e campanhas publicitárias.
             </p>
             
