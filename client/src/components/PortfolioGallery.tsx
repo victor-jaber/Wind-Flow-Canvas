@@ -108,7 +108,7 @@ export function PortfolioGallery() {
       </div>
 
       <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
-        <DialogContent className="max-w-3xl p-2">
+        <DialogContent className="max-w-md p-4">
           {selectedItem && (
             <>
               <DialogTitle className="sr-only">
@@ -117,7 +117,7 @@ export function PortfolioGallery() {
               <img 
                 src={selectedItem.image} 
                 alt={`Wind Banner ${selectedItem.id}`}
-                className="w-full h-auto rounded-lg"
+                className="w-full max-h-[70vh] object-contain rounded-lg"
               />
             </>
           )}
