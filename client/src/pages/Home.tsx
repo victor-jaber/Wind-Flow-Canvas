@@ -5,6 +5,7 @@ import { BenefitsSection } from "@/components/BenefitsSection";
 import { ProductGallery } from "@/components/ProductGallery";
 import { PriceCalculator } from "@/components/PriceCalculator";
 import { PortfolioGallery } from "@/components/PortfolioGallery";
+import { FAQSection } from "@/components/FAQSection";
 import { CTASection } from "@/components/CTASection";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { Footer } from "@/components/Footer";
@@ -20,6 +21,7 @@ export default function Home() {
         <ProductGallery />
         <PriceCalculator />
         <PortfolioGallery />
+        <FAQSection />
         <CTASection />
         <WhatsAppCTA />
       </main>
