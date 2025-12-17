@@ -14,7 +14,13 @@ export function WindBannerAnimation({
   showPole = true,
 }: WindBannerAnimationProps) {
   const [windForce, setWindForce] = useState({ x: 0, y: 0 });
-  const [naturalWind, setNaturalWind] = useState({ intensity: 0, angle: 0 });
+  const [animState, setAnimState] = useState({
+    intensity: 0,
+    angle: 0,
+    wave1: 0,
+    wave2: 0,
+    wave3: 0,
+  });
   const animationRef = useRef<number>();
   const timeRef = useRef(0);
 
@@ -31,7 +37,7 @@ export function WindBannerAnimation({
 
   useEffect(() => {
     const animateNaturalWind = () => {
-      timeRef.current += 0.016;
+      timeRef.current += 0.02;
       const t = timeRef.current;
       
       const baseWind = Math.sin(t * 0.5) * 0.3;
@@ -42,7 +48,11 @@ export function WindBannerAnimation({
       const intensity = baseWind + gustWind + microWind + turbulence;
       const angle = Math.sin(t * 0.7) * 5 + Math.sin(t * 2.1) * 2;
       
-      setNaturalWind({ intensity, angle });
+      const wave1 = Math.sin(t * 3) * 2;
+      const wave2 = Math.sin(t * 4 + 1) * 1.5;
+      const wave3 = Math.sin(t * 5 + 2) * 1;
+      
+      setAnimState({ intensity, angle, wave1, wave2, wave3 });
       animationRef.current = requestAnimationFrame(animateNaturalWind);
     };
 
@@ -68,8 +78,8 @@ export function WindBannerAnimation({
     xl: "h-96",
   };
 
-  const combinedWindX = windForce.x * 0.3 + naturalWind.intensity;
-  const combinedAngle = naturalWind.angle + windForce.x * 3;
+  const combinedWindX = windForce.x * 0.3 + animState.intensity;
+  const combinedAngle = animState.angle + windForce.x * 3;
 
   const fabricStyle = {
     transform: `
@@ -77,7 +87,6 @@ export function WindBannerAnimation({
       rotateY(${combinedWindX * 12}deg)
       rotateZ(${combinedAngle * 0.5}deg)
     `,
-    transition: "transform 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
   };
 
   const shadowStyle = {
@@ -87,12 +96,7 @@ export function WindBannerAnimation({
       rotateZ(${combinedAngle * 0.6}deg)
       translateX(${combinedWindX * 3}px)
     `,
-    transition: "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
   };
-
-  const waveOffset1 = Math.sin(timeRef.current * 3) * 2;
-  const waveOffset2 = Math.sin(timeRef.current * 4 + 1) * 1.5;
-  const waveOffset3 = Math.sin(timeRef.current * 5 + 2) * 1;
 
   return (
     <div className={`relative flex flex-col items-center ${className}`}>
@@ -118,22 +122,22 @@ export function WindBannerAnimation({
             clipPath: `polygon(
               0 0, 
               100% 0, 
-              ${100 + waveOffset1}% 20%,
-              ${98 + waveOffset2}% 40%,
-              ${100 + waveOffset3}% 60%,
-              ${97 + waveOffset1}% 80%,
+              ${100 + animState.wave1}% 20%,
+              ${98 + animState.wave2}% 40%,
+              ${100 + animState.wave3}% 60%,
+              ${97 + animState.wave1}% 80%,
               100% 95%, 
               85% 100%, 
-              70% ${97 + waveOffset2}%, 
+              70% ${97 + animState.wave2}%, 
               55% 100%, 
-              40% ${96 + waveOffset3}%, 
+              40% ${96 + animState.wave3}%, 
               25% 100%, 
-              10% ${98 + waveOffset1}%, 
+              10% ${98 + animState.wave1}%, 
               0 100%,
-              ${-waveOffset2}% 80%,
-              ${waveOffset1}% 60%,
-              ${-waveOffset3}% 40%,
-              ${waveOffset2}% 20%
+              ${-animState.wave2}% 80%,
+              ${animState.wave1}% 60%,
+              ${-animState.wave3}% 40%,
+              ${animState.wave2}% 20%
             )`,
           }}
         >
@@ -214,7 +218,6 @@ export function WindBannerAnimation({
             transformOrigin: "top center",
             background: "hsl(var(--primary) / 0.5)",
             clipPath: "polygon(0 0, 100% 0, 100% 95%, 85% 100%, 70% 95%, 55% 100%, 40% 95%, 25% 100%, 10% 95%, 0 100%)",
-            transition: "transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         />
       </div>
