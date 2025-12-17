@@ -118,7 +118,7 @@ export function WindBannerAnimation({
       {showPole && (
         <>
           <div
-            className="absolute bg-gradient-to-b from-zinc-300 via-zinc-400 to-zinc-500 dark:from-zinc-400 dark:via-zinc-500 dark:to-zinc-600 rounded-full shadow-md"
+            className="absolute bg-gradient-to-b from-gray-200 via-gray-300 to-gray-400 rounded-full shadow-lg"
             style={{ 
               width: 8,
               height: config.pole,
@@ -127,7 +127,7 @@ export function WindBannerAnimation({
             }}
           />
           <div
-            className="absolute bottom-0 bg-gradient-to-t from-zinc-600 via-zinc-500 to-zinc-400 dark:from-zinc-700 dark:via-zinc-600 dark:to-zinc-500 rounded-md shadow-lg"
+            className="absolute bottom-0 bg-gradient-to-t from-gray-500 via-gray-400 to-gray-300 rounded-md shadow-xl"
             style={{
               width: config.base * 1.5,
               height: config.base,
@@ -135,7 +135,7 @@ export function WindBannerAnimation({
             }}
           />
           <div
-            className="absolute bg-zinc-700 dark:bg-zinc-800 rounded-sm"
+            className="absolute bg-gray-600 rounded-sm shadow-lg"
             style={{
               width: config.base * 1.8,
               height: 6,
@@ -156,14 +156,14 @@ export function WindBannerAnimation({
         }}
       >
         <div
-          className="absolute inset-0 bg-gradient-to-b from-primary via-primary to-primary/90 rounded-b-lg shadow-xl"
+          className="absolute inset-0 bg-gradient-to-b from-white via-white to-white/95 rounded-b-lg shadow-2xl border border-white/50"
           style={{
             ...fabricStyle,
             transformOrigin: "top center",
           }}
         >
           <div 
-            className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-white/10"
+            className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-primary/5"
             style={{ 
               opacity: 0.6 + Math.abs(combinedWindX) * 0.4,
             }}
@@ -174,18 +174,18 @@ export function WindBannerAnimation({
               background: `linear-gradient(
                 ${90 + combinedAngle}deg, 
                 transparent 0%, 
-                rgba(255,255,255,0.15) ${25 + animState.wave3 * 3}%, 
+                rgba(139,92,246,0.1) ${25 + animState.wave3 * 3}%, 
                 transparent ${40 + animState.wave2 * 2}%,
-                rgba(0,0,0,0.08) ${60 + animState.wave4 * 2}%,
+                rgba(0,0,0,0.03) ${60 + animState.wave4 * 2}%,
                 transparent ${75 + animState.wave5 * 2}%,
-                rgba(255,255,255,0.1) ${90 + animState.wave1 * 1}%,
+                rgba(139,92,246,0.08) ${90 + animState.wave1 * 1}%,
                 transparent 100%
               )`,
             }}
           />
           <div className="absolute inset-0 flex items-center justify-center">
             <span
-              className={`text-primary-foreground font-bold ${config.fontSize} tracking-wide drop-shadow-sm`}
+              className={`text-primary font-bold ${config.fontSize} tracking-wide drop-shadow-sm`}
               style={{
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
@@ -196,7 +196,7 @@ export function WindBannerAnimation({
             </span>
           </div>
           <div 
-            className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-b from-black/10 to-transparent rounded-t"
+            className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-b from-primary/10 to-transparent rounded-t"
           />
         </div>
         
