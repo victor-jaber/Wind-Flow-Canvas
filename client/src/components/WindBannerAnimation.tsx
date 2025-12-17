@@ -80,31 +80,21 @@ export function WindBannerAnimation({
   const combinedAngle = animState.angle + windForce.x * 3;
 
   const featherPath = `polygon(
-    ${50 + animState.wave1 * 0.3}% 0%,
-    ${65 + animState.wave2 * 0.5}% 2%,
-    ${80 + animState.wave3 * 0.6}% 5%,
-    ${90 + animState.wave4 * 0.7}% 10%,
-    ${96 + animState.wave5 * 0.8}% 18%,
-    ${100 + animState.wave3 * 1.0}% 28%,
-    ${98 + animState.wave4 * 1.2}% 40%,
-    ${100 + animState.wave5 * 1.0}% 52%,
-    ${97 + animState.wave3 * 1.2}% 65%,
-    ${100 + animState.wave2 * 0.8}% 78%,
-    ${95 + animState.wave4 * 0.6}% 88%,
-    ${85 + animState.wave5 * 0.4}% 95%,
+    0% 0%,
+    ${35 + animState.wave1 * 0.8}% 0%,
+    ${55 + animState.wave2 * 1.0}% 1%,
+    ${72 + animState.wave3 * 1.2}% 3%,
+    ${85 + animState.wave4 * 1.0}% 6%,
+    ${94 + animState.wave5 * 0.8}% 12%,
+    ${100 + animState.wave3 * 1.2}% 22%,
+    ${98 + animState.wave4 * 1.5}% 35%,
+    ${100 + animState.wave5 * 1.2}% 48%,
+    ${97 + animState.wave3 * 1.5}% 62%,
+    ${100 + animState.wave2 * 1.0}% 76%,
+    ${95 + animState.wave4 * 0.8}% 88%,
+    ${85 + animState.wave5 * 0.5}% 96%,
     ${70 + animState.wave3 * 0.3}% 100%,
-    ${50 + animState.wave2 * 0.2}% 100%,
-    ${30 + animState.wave1 * 0.3}% 100%,
-    ${15 + animState.wave4 * 0.4}% 95%,
-    ${5 + animState.wave5 * 0.6}% 88%,
-    ${0 + animState.wave2 * 0.8}% 78%,
-    ${3 + animState.wave3 * 1.2}% 65%,
-    ${0 + animState.wave5 * 1.0}% 52%,
-    ${2 + animState.wave4 * 1.2}% 40%,
-    ${0 + animState.wave3 * 1.0}% 28%,
-    ${4 + animState.wave5 * 0.8}% 18%,
-    ${15 + animState.wave4 * 0.5}% 8%,
-    ${30 + animState.wave2 * 0.3}% 3%
+    0% 100%
   )`;
 
   const fabricStyle = {
@@ -123,26 +113,32 @@ export function WindBannerAnimation({
           <div
             className="absolute bg-gradient-to-b from-zinc-300 via-zinc-400 to-zinc-500 dark:from-zinc-400 dark:via-zinc-500 dark:to-zinc-600 rounded-full shadow-md"
             style={{ 
-              width: 8,
+              width: 6,
               height: config.pole,
               bottom: config.base / 2,
+              left: '0%',
+              transform: 'translateX(-50%)',
               zIndex: 1,
             }}
           />
           <div
             className="absolute bottom-0 bg-gradient-to-t from-zinc-600 via-zinc-500 to-zinc-400 dark:from-zinc-700 dark:via-zinc-600 dark:to-zinc-500 rounded-md shadow-lg"
             style={{
-              width: config.base * 1.5,
+              width: config.base * 1.2,
               height: config.base,
+              left: '0%',
+              transform: 'translateX(-50%)',
               zIndex: 0,
             }}
           />
           <div
             className="absolute bg-zinc-700 dark:bg-zinc-800 rounded-sm"
             style={{
-              width: config.base * 1.8,
-              height: 6,
+              width: config.base * 1.5,
+              height: 5,
               bottom: 0,
+              left: '0%',
+              transform: 'translateX(-50%)',
               zIndex: 0,
             }}
           />
@@ -186,7 +182,7 @@ export function WindBannerAnimation({
               )`,
             }}
           />
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-start pl-2">
             <span
               className={`text-primary-foreground font-bold ${config.fontSize} tracking-wide drop-shadow-sm`}
               style={{
